@@ -115,7 +115,7 @@ nTenjin.Template.prototype = {
 		if (! text) return;
 		var s = text.replace(/[\'\\]/g, '\\$&').replace(/\n/g, '\\n\\\n');
 		buf.push("_buf+='", s, "'");
-	}
+	},
 
 	_end: undefined  // dummy property to escape strict warning (not legal in ECMA-262)
 };
