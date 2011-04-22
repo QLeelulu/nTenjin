@@ -1,6 +1,11 @@
 #What is this?
-基于jsTenjin修改的高性能的支持node.js的模板解析引擎
+基于[jsTenjin](http://www.kuwata-lab.com/tenjin/jstenjin-users-guide.html)修改的高性能的支持node.js的模板解析引擎
+(A template engine base on [jsTenjin's](http://www.kuwata-lab.com/tenjin/jstenjin-users-guide.html) and more fase and support node.js )
 
 #Change from jsTenjin
-jsTenjin是使用`eval`来解析的，而nTenjin是使用 `new Function` 来解析的。速度主要差别在这里。
-nTenjin中变量必须由`it`来指定，例如`#{param}`要修改为`#{it.param}`,其他和jsTenjin完全一致。
++ jsTenjin是使用`eval`来解析的，而nTenjin是使用 `new Function` 来解析的(速度差别之一)。
++ jsTenjin是使用`Array.push`来构造字符串的，而nTenjin是使用 `String += str` 来构造字符串的(速度差别之二)。
++ nTenjin中变量必须由`it`来指定，例如`#{param}`要修改为`#{it.param}`,其他和jsTenjin完全一致。
+
+#Benchmarks
+at [here](http://jsperf.com/dom-vs-innerhtml-based-templating/142)
