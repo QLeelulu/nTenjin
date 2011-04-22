@@ -54,8 +54,6 @@ nTenjin.Template.prototype = {
 
 	escapefunc: 'escapeXml',
 
-	program: null,
-
 	convert: function(input) {
 		var buf = [];
 		buf.push("var _buf='';");
@@ -64,7 +62,7 @@ nTenjin.Template.prototype = {
 		buf = buf.join('').split("_buf+='';").join('')
 			 .split("var _buf='';_buf+=").join('var _buf=');
         	try {
-			return this.program = new Function('it', buf);
+			return this.render = new Function('it', buf);
 		} catch (e) {
 			if (typeof console !== 'undefined') console.log("Could not create a template function: " + str);
 			throw e;
@@ -117,11 +115,7 @@ nTenjin.Template.prototype = {
 		if (! text) return;
 		var s = text.replace(/[\'\\]/g, '\\$&').replace(/\n/g, '\\n\\\n');
 		buf.push("_buf+='", s, "'");
-	},
-
-	render: function(_context) {
-		return this.program(_context);
-	},
+	}
 
 	_end: undefined  // dummy property to escape strict warning (not legal in ECMA-262)
 };
