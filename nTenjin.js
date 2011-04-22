@@ -31,16 +31,6 @@ var nTenjin = {
 		//return s.replace(/^\s+|\s+$/g, '');
 		return s.replace(/^\s+/, '').replace(/\s+$/, '');
 	},
-
-	// ex. {x: 10, y: 'foo'}
-	//       => "var x = _context['x'];\nvar y = _conntext['y'];\n"
-	_setlocalvarscode: function(obj) {
-		var buf = '';
-		for (var p in obj) {
-			buf += "var " + p + " = _context['" + p + "'];\n";
-		}
-		return buf;
-	},
 	
 	_end: undefined  // dummy property to escape strict warning (not legal in ECMA-262)
 };
@@ -66,13 +56,13 @@ nTenjin.Template.prototype = {
 
 	convert: function(input) {
 		var buf = [];
-		buf.push("if(_context){eval(nTenjin._setlocalvarscode(_context));};var _buf='';");
+		buf.push("var _buf='';");
 		this.parseStatements(buf, input);
 		buf.push("return _buf;");
 		buf = buf.join('').split("_buf+='';").join('')
 			 .split("var _buf='';_buf+=").join('var _buf=');
         	try {
-			return this.render = new Function('_context', buf);
+			return this.render = new Function('it', buf);
 		} catch (e) {
 			if (typeof console !== 'undefined') console.log("Could not create a template function: " + str);
 			throw e;
