@@ -56,9 +56,9 @@ nTenjin.Template.prototype = {
 
 	convert: function(input) {
 		var buf = [];
-		buf.push("with(it){var _buf='';");
+		buf.push("var _buf='';");
 		this.parseStatements(buf, input);
-		buf.push("return _buf;}");
+		buf.push("return _buf;");
 		buf = buf.join('').split("_buf+='';").join('')
 			 .split("var _buf='';_buf+=").join('var _buf=');
         	try {
