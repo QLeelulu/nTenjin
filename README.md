@@ -9,3 +9,12 @@
 
 #Benchmarks
 at [here](http://jsperf.com/dom-vs-innerhtml-based-templating/142)
+
+#User's Guide
+	
+	var d = {name:'nTenjin'};
+	nTenjin.render('Hello #{it.name}!', d);
+
+note that the `it`
+
+more detail at [jsTenjin User's Guide](http://www.kuwata-lab.com/tenjin/jstenjin-users-guide.html)
