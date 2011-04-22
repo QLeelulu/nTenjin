@@ -58,11 +58,13 @@ nTenjin.Template.prototype = {
 
 	convert: function(input) {
 		var buf = [];
-		buf.push("var _buf = '';");
+		buf.push("var _buf='';");
 		this.parseStatements(buf, input);
 		buf.push("return _buf;");
-        try {
-			return this.program = new Function('it', buf.join(''));
+		buf = buf.join('').split("_buf+='';").join('')
+			 .split("var _buf='';_buf+=").join('var _buf=');
+        	try {
+			return this.program = new Function('it', buf);
 		} catch (e) {
 			if (typeof console !== 'undefined') console.log("Could not create a template function: " + str);
 			throw e;
