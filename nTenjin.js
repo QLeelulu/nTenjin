@@ -56,9 +56,9 @@ nTenjin.Template.prototype = {
 
 	convert: function(input) {
 		var buf = [];
-		buf.push("var _buf='';");
+		buf.push("with(it){var _buf='';");
 		this.parseStatements(buf, input);
-		buf.push("return _buf;");
+		buf.push("return _buf;}");
 		buf = buf.join('').split("_buf+='';").join('')
 			 .split("var _buf='';_buf+=").join('var _buf=');
         	try {
@@ -131,3 +131,10 @@ nTenjin.render = function(template_str, context) {
 	var output = template.render(context);
 	return output;
 };
+
+/*
+ *  node.js
+ */
+if (typeof module !== 'undefined' && module.exports) {
+	module.exports = nTenjin;
+}
