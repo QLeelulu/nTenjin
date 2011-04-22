@@ -9,15 +9,15 @@
  *  namespace
  */
 
-var Shotenjin = {
+var nTenjin = {
 
 	_escape_table: { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' },
 
-	_escape_func: function(m) { return Shotenjin._escape_table[m] },
+	_escape_func: function(m) { return nTenjin._escape_table[m] },
 
 	escapeXml: function(s) {
 		//if (s == null) return '';
-		return typeof(s) != 'string' ? s : s.replace(/[&<>"]/g, Shotenjin._escape_func); //"
+		return typeof(s) != 'string' ? s : s.replace(/[&<>"]/g, nTenjin._escape_func); //"
 		//return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); //"
 	},
 
@@ -44,23 +44,23 @@ var Shotenjin = {
 	
 	_end: undefined  // dummy property to escape strict warning (not legal in ECMA-262)
 };
-delete(Shotenjin._end);
+delete(nTenjin._end);
 
-var escapeXml = Shotenjin.escapeXml;
+var escapeXml = nTenjin.escapeXml;
 
 
 /**
  *  Template class
  */
 
-Shotenjin.Template = function(properties) {
+nTenjin.Template = function(properties) {
 	if (properties) {
 		var p = properties;
 		if (p['escaefunc']) this.escapefunc = p['escapefunc'];
 	}
 };
 
-Shotenjin.Template.prototype = {
+nTenjin.Template.prototype = {
 
 	escapefunc: 'escapeXml',
 
@@ -133,14 +133,14 @@ Shotenjin.Template.prototype = {
 
 	_end: undefined  // dummy property to escape strict warning (not legal in ECMA-262)
 };
-delete(Shotenjin.Template.prototype._end);
+delete(nTenjin.Template.prototype._end);
 
 
 /*
  *  convenient function
  */
-Shotenjin.render = function(template_str, context) {
-	var template = new Shotenjin.Template();
+nTenjin.render = function(template_str, context) {
+	var template = new nTenjin.Template();
 	template.convert(template_str);
 	var output = template.render(context);
 	return output;
