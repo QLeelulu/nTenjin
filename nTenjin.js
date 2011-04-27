@@ -142,4 +142,3 @@ if (typeof module !== 'undefined' && module.exports) {
 	module.exports = nTenjin;
 }
 
-console.log(nTenjin.render('hi, #{it.name}, ${it.age}', {name:'lulu', age:23}) )
