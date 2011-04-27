@@ -36,7 +36,8 @@ var nTenjin = {
 };
 delete(nTenjin._end);
 
-var escapeXml = nTenjin.escapeXml;
+// 因为用 new Function 创建的函数，其[[scope]]的作用域链只包含全局对象，所以这里定义为全局变量
+_nTenjinEscapeXml = nTenjin.escapeXml;
 
 
 /**
@@ -52,7 +53,7 @@ nTenjin.Template = function(properties) {
 
 nTenjin.Template.prototype = {
 
-	escapefunc: 'escapeXml',
+	escapefunc: '_nTenjinEscapeXml',
 
 	convert: function(input) {
 		var buf = [];
@@ -62,10 +63,9 @@ nTenjin.Template.prototype = {
 		buf = buf.join('').split("_buf+='';").join('')
 			 .split("var _buf='';_buf+=").join('var _buf=');
         try {
-            // in node.js, new Function can not access the local var
-			//return this.render = new Function('it', buf);
-            eval('this.render = function(it){' + buf + '};');
-            return this.render;
+			return this.render = new Function('it', buf);
+            //eval('this.render = function(it){' + buf + '};');
+            //return this.render;
 		} catch (e) {
 			if (typeof console !== 'undefined') console.log("Could not create a template function: " + buf);
 			throw e;
