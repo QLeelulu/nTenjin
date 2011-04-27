@@ -61,10 +61,13 @@ nTenjin.Template.prototype = {
 		buf.push("return _buf;");
 		buf = buf.join('').split("_buf+='';").join('')
 			 .split("var _buf='';_buf+=").join('var _buf=');
-        	try {
-			return this.render = new Function('it', buf);
+        try {
+            // in node.js, new Function can not access the local var
+			//return this.render = new Function('it', buf);
+            eval('this.render = function(it){' + buf + '};');
+            return this.render;
 		} catch (e) {
-			if (typeof console !== 'undefined') console.log("Could not create a template function: " + str);
+			if (typeof console !== 'undefined') console.log("Could not create a template function: " + buf);
 			throw e;
 		}
 	},
@@ -138,3 +141,5 @@ nTenjin.render = function(template_str, context) {
 if (typeof module !== 'undefined' && module.exports) {
 	module.exports = nTenjin;
 }
+
+console.log(nTenjin.render('hi, #{it.name}, ${it.age}', {name:'lulu', age:23}) )
