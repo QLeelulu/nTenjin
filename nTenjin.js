@@ -10,10 +10,12 @@
  */
 
 var nTenjin = {
-
+	
+	version: '0.1.0',	
+	
 	_escape_table: { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' },
 
-	_escape_func: function(m) { return nTenjin._escape_table[m] },
+	_escape_func: function(m) { return nTenjin._escape_table[m]; },
 
 	escapeXml: function(s) {
 		//if (s == null) return '';
@@ -133,6 +135,19 @@ nTenjin.render = function(template_str, context) {
 	template.convert(template_str);
 	var output = template.render(context);
 	return output;
+};
+
+/**
+ * compile str to Function
+ * 
+ * @param {String} str, template string
+ * @return {Function}
+ * @api public
+ */
+
+nTenjin.compile = function(str, options) {
+	var tpl = new nTenjin.Template();
+	return tpl.convert(str);
 };
 
 /*

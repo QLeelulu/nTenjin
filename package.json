@@ -1,0 +1,20 @@
+{
+  "name": "tenjin",
+  "description": "A high performance template engine base on node.js.",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/QLeelulu/nTenjin.git"
+  },
+  "author": "QLeelulu <qleelulu@gmail.com> (http://qleelulu.cnblogs.com/)",
+  "contributors": [
+    { "name": "fengmk2", "email": "fengmk2@gmail.com" }
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "expresso test"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
