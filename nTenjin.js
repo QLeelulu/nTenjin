@@ -11,7 +11,7 @@
 
 var nTenjin = {
 	
-	version: '0.1.0',	
+	version: '0.1.1',	
 	
 	_escape_table: { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' },
 

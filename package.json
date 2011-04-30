@@ -1,7 +1,7 @@
 {
   "name": "tenjin",
   "description": "A high performance template engine base on node.js.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/QLeelulu/nTenjin.git"

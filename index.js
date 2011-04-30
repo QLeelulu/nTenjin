@@ -1,2 +1,2 @@
 
-module.exports = require('../nTenjin');
+module.exports = require('./nTenjin');
